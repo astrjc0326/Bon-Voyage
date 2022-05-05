@@ -1,15 +1,17 @@
 import React from 'react';
 import DestinationEntry from './DestinationEntry.jsx';
+import AddFlight from './AddFlight.jsx';
 import styled from 'styled-components';
 
 
-const FlightList = ( { exampleData } ) => {
+const FlightList = ( { data, getData } ) => {
   return(
   <div>
+    {/* <AddFlight /> */}
     <h1>Flight List</h1>
+    {/* <h2>Leaving From: {exampleData.fly_from}</h2> */}
 
-    <p>Leaving From: {exampleData.fly_from}</p>
-    <DestinationEntry flightlist={exampleData.flightlist}/>
+    <DestinationEntry flightlist={data} getData={getData}/>
 
   </div>
   )

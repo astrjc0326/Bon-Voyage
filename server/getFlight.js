@@ -1,18 +1,36 @@
-const axios = require('axios')
+const axios = require('axios');
+const sendMail = require('./sendMail.js').sendMail
 
-const getFlight = () => {
-  const query = {
-    fly_from: 'SFO',
-    fly_to: 'TPE',
-    date_from: '28/4/2022',
-    curr: 'USD'
+module.exports = {
+  getFlight: (from, to, price) => {
+    const query = {
+      fly_from: from,
+      fly_to: to,
+      date_from: '28/4/2022',
+      curr: 'USD'
+    }
+    const headers = {
+      apikey: 'LtW_J16JSqMppDXbbStSCupp_jPfoiY5'
+    }
+    axios.get('https://tequila-api.kiwi.com/v2/search', {
+      params: query,
+      headers: headers
+    })
+    .then(res => {
+      console.log(res.data.data[0], res.data.data[0].price)
+      const flightInfo = res.data.data[0]
+      if (flightInfo.price <= price) {
+        sendMail(flightInfo.cityFrom, flightInfo.flyFrom, flightInfo.cityTo, flightInfo.flyTo, flightInfo.price, flightInfo.deep_link, (err, result)=> {
+          if (err) {
+            console.log('can not send email ')
+          } else {
+            console.log('send email successfully')
+          }
+        })
+      } else {
+        console.log(`no flight for ${to} for ${price}`)
+      }
+    })
+    .catch(err => console.log(err))
   }
-  const headers = {
-    apikey: 'LtW_J16JSqMppDXbbStSCupp_jPfoiY5'
-  }
-  axios.get('https://tequila-api.kiwi.com/v2/search', {
-    params: query,
-    headers: headers
-  })
-  .then(res => console.log(res.data.data[0], res.data.data[0].price))
-  .catch(err => console.log(err))
+}

@@ -8,67 +8,96 @@ import Login from './Login.jsx';
 import SearchAirport from './SearchAirport/SearchAirport.jsx';
 import axios from 'axios'
 
+const AppContainer = styled.div`
+  align-items: center;
+`
+
+const LogoDiv = styled.div`
+  padding:20px;
+  padding-left: 800px
+`
+
 const Navbar = styled.div`
-  display: flex;
-  justify-content: space-between;
-  background-color: #1572A1;
+  background-color: #0A4183;
   color: #EFDAD7
 `
 const Container = styled.div`
-  padding: 20px
+  left: 30%;
+  height: 650px;
+  overflow: auto;
+  width: 650px;
+  margin-left: 600px
 `
+
+const Button = styled.button`
+  width: 100px;
+  height: 30px;
+  margin: 3px
+`
+
+const Footer = styled.footer`
+  margin-left: 35%;
+`
+
 
 const App = () => {
   const [number, setNumber] = useState(1);
   const [window, setWindow] = useState('');
-  const exampleData = {fly_from: 'SFO', flightlist:
-    [ {flight_to: 'TPE', price: 500},
-      {flight_to: 'LON', price: 480}]
+  const [showSignIn, setShowSignin] = useState(false);
+  const [data, setData] = useState([]);
+  const [update, setUpdate] = useState(false);
+
+  // const showLogin = (window === 'login') ? <Login /> : ''
+
+  const getData = () => {
+    axios.get('flightlist')
+      .then(res => {console.log(res); setData(res.data)})
+      .catch()
   }
-  // const getFlight = () => {
-  //   const query = {
-  //     fly_from: 'SFO',
-  //     fly_to: 'TPE',
-  //     date_from: '28/4/2022',
-  //     curr: 'USD'
-  //   }
-  //   const headers = {
-  //     apikey: 'LtW_J16JSqMppDXbbStSCupp_jPfoiY5'
-  //   }
-  //   axios.get('https://tequila-api.kiwi.com/v2/search', {
-  //     params: query,
-  //     headers: headers
-  //   })
-  //   .then(res => console.log(res.data.data[0], res.data.data[0].price))
-  //   .catch(err => console.log(err))
-  // }
-  // useEffect(() => {
-  //   getFlight()
-  // },[]);
-  const showLogin = (window === 'login') ? <Login /> : ''
-  const showFlightList = (window === 'flightlist') ? <FlightList exampleData={exampleData}/> : ''
+
+  useEffect(()=> {
+    getData()
+  }, []);
+
+  const showFlightList = (window === 'flightlist') ? <FlightList data={data} getData={getData} /> : ''
   const showJournal = (window === 'journal') ? <TravelJournal /> : ''
 
   return (
-    <div>
+    <AppContainer>
       <Navbar>
-        <div style={{padding: '10px'}}><h1>BonVoyage</h1><Logo /></div>
-      <div>
-      <button onClick={() => {setWindow('flightlist')}}>My Trip</button>
-      <button onClick={() => {setWindow('journal')}}>My Journal</button>
-      <button onClick={() => {setWindow('login')}}>Sign In</button>
-      </div>
-      </Navbar>
-      <Container>
-      <Search />
-      <h2>Where are you going?</h2>
-      <SearchAirport />
+        <LogoDiv>
+          {/* <h1>BonVoyage</h1> */}
+          <Logo/>      <div>
+      <Button onClick={() => {setWindow('flightlist')}}>My Trip</Button>
+      <Button onClick={() => {setWindow('journal')}}>My Journal</Button>
+      <Button onClick={() => {setShowSignin(true)}}>Sign In</Button>
+      </div></LogoDiv>
 
-      {showLogin}
+      </Navbar>
+
+      <Container>
+      {/* <Search /> */}
+      <SearchAirport getData={ getData }/>
+
+      {(showSignIn) ? <Login onClose={setShowSignin}/> : ''}
       {showFlightList}
       {showJournal}
       </Container>
-    </div>)
+      <hr />
+
+      <Footer>
+
+        <p>
+        <a>About</a>
+        <a>Privacy</a>
+        <a>Terms</a>
+        <a>Join user studies</a>
+        <a>Feedback</a>
+        <a>Help Center</a>
+        </p>
+      </Footer>
+
+    </AppContainer>)
 }
 
 export default App

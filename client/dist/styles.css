@@ -22,12 +22,7 @@ body {
 }
 
 body {
-  font-family: 'Kalam', cursive;
-  font-family: 'M PLUS 1', sans-serif;
-  font-family: 'Open Sans', sans-serif;
-  font-family: 'Source Sans Pro', sans-serif;
-  font-family: 'Space Mono', monospace;
-  font-family: 'Work Sans', sans-serif;
+  font-family: 'Poppins', sans-serif;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
@@ -46,7 +41,50 @@ h1 {
 
 
 input{
-  background-color: rgb(232, 231, 231);
+  background-color: rgb(245, 244, 244);
   border: 0cm;
   height: 30px;
+  margin: 2px;
+  text-align: right;
 }
+
+button{
+  background-color: aliceblue;
+  border: 0cm;
+
+}
+
+button:hover,:focus {
+  background-color: #1572A1;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+label:hover,:focus {
+  color: white;
+  background-color: #1572A1;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+}
+
+a{
+  cursor: pointer;
+  margin-top: 4px;
+  padding: 6px 10px;
+  text-align: center;
+}
+
+a:hover{
+  color: #1572A1;
+  text-decoration: underline;
+}
+
