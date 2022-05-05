@@ -11,7 +11,7 @@ module.exports = {
     })
     const mailOptions = {
       from: process.env.EMAIL,
-      to: 'astrjc.anny@gmail.com',
+      to: process.env.CLIENT_EMAIL,
       subject: 'Low Price Alert!',
       text: `Only $${price} to fly from ${fromCity}-${from} to ${toCity}-${to}, link:${link}`
     };

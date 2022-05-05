@@ -39,13 +39,11 @@ const Footer = styled.footer`
   margin-left: 35%;
 `
 
-
 const App = () => {
   const [number, setNumber] = useState(1);
   const [window, setWindow] = useState('');
   const [showSignIn, setShowSignin] = useState(false);
   const [data, setData] = useState([]);
-  const [update, setUpdate] = useState(false);
 
   // const showLogin = (window === 'login') ? <Login /> : ''
 
@@ -86,7 +84,6 @@ const App = () => {
       <hr />
 
       <Footer>
-
         <p>
         <a>About</a>
         <a>Privacy</a>

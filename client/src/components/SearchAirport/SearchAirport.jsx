@@ -50,6 +50,7 @@ const SearchAirport = ( { getData} ) => {
   }
   const searchFlights = () => {
     setisLoading(true);
+    setFlights([]);
     const transFromDate = moment(departDate).format('DD/MM/YYYY').toString()
     const transReturnDate = moment(returnDate).format('DD/MM/YYYY').toString()
     const query = {
@@ -80,6 +81,7 @@ const SearchAirport = ( { getData} ) => {
   return (
     <div>
           <h2 style={{padding: '30px 0px 30px 0px'}}>Where are you going?</h2>
+
     <Container>
       <div>
       <DropDown>
@@ -136,16 +138,17 @@ const SearchAirport = ( { getData} ) => {
 
     <input placeholder='Return' type='date' onChange={(e) => setReturnDate(e.target.value)}></input>
     <button onClick={() => searchFlights()}><span class="material-symbols-outlined">
-search
-</span></button>
+    search
+    </span>
+    </button>
 
     </Container>
     <AddButton onClick={() => setAddFlightOnClick(true)}>Add to Flight List</AddButton>
-
-    <FlightEntry flights={flights}/>
-    {isLoading ? <div style={{position: 'relative', left: '50%'}}><Loading /></div> : ''}
     {AddFlightOnClick ? <AddFlight from={fromIATA}
     desination={toIATA} getData={getData}/> : ''}
+    <FlightEntry flights={flights}/>
+    {isLoading ? <div style={{position: 'relative', left: '50%'}}><Loading /></div> : ''}
+
     </div>
   )
 }

@@ -23,28 +23,6 @@ app.get('/email', (req, res) => {
       res.sendStatus(200)
     }
   })
-  // const transporter = nodemailer.createTransport({
-  //   service: 'gmail',
-  //   auth: {
-  //     user: process.env.EMAIL,
-  //     pass: process.env.EMAILPW
-  //   }
-  // })
-  // const mailOptions = {
-  //   from: process.env.EMAIL,
-  //   to: 'astrjc.anny@gmail.com',
-  //   subject: 'Hello',
-  //   text: 'That was cool!'
-  // };
-  // transporter.sendMail(mailOptions, (err, info) => {
-  //   if (err) {
-  //     console.log(err)
-  //     res.sendStatus(404)
-  //   } else {
-  //     console.log('Email sent', info.response)
-  //     res.sendStatus(200)
-  //   }
-  // })
 })
 app.get('/airport', (req, res) => {
   console.log(req.query.term)
@@ -62,12 +40,11 @@ app.get('/airport', (req, res) => {
 app.get('/flights', (req, res) => {
   let query = req.query;
   query.curr = 'USD';
-  query.one_for_city = 1;
+  // query.one_for_city = 1;
   // query.flight_type = 'round';
   // query.max_stopover = 0;
   // query.nights_in_dst_from = 7;
   // query.nights_in_dst_to = 28;
-  console.log(query);
   const headers = {
     apikey: process.env.FLIGHT_API
   }

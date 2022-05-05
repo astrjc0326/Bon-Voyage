@@ -265,12 +265,7 @@ var App = function App() {
   var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
       _useState8 = _slicedToArray(_useState7, 2),
       data = _useState8[0],
-      setData = _useState8[1];
-
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-      _useState10 = _slicedToArray(_useState9, 2),
-      update = _useState10[0],
-      setUpdate = _useState10[1]; // const showLogin = (window === 'login') ? <Login /> : ''
+      setData = _useState8[1]; // const showLogin = (window === 'login') ? <Login /> : ''
 
 
   var getData = function getData() {
@@ -377,7 +372,7 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 
 
-var Container = styled_components__WEBPACK_IMPORTED_MODULE_3__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-around;\n"])));
+var Container = styled_components__WEBPACK_IMPORTED_MODULE_3__["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  padding-top: 20px;\n  display: flex;\n  justify-content: space-around;\n"])));
 
 var AddFlight = function AddFlight(_ref) {
   var getData = _ref.getData,
@@ -977,6 +972,7 @@ var SearchAirport = function SearchAirport(_ref) {
 
   var searchFlights = function searchFlights() {
     setisLoading(true);
+    setFlights([]);
     var transFromDate = moment__WEBPACK_IMPORTED_MODULE_2___default()(departDate).format('DD/MM/YYYY').toString();
     var transReturnDate = moment__WEBPACK_IMPORTED_MODULE_2___default()(returnDate).format('DD/MM/YYYY').toString();
     var query = {
@@ -1092,7 +1088,11 @@ var SearchAirport = function SearchAirport(_ref) {
         return setAddFlightOnClick(true);
       },
       children: "Add to Flight List"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_FlightEntry_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    }), AddFlightOnClick ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_FlightList_AddFlight_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      from: fromIATA,
+      desination: toIATA,
+      getData: getData
+    }) : '', /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_FlightEntry_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
       flights: flights
     }), isLoading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
       style: {
@@ -1100,10 +1100,6 @@ var SearchAirport = function SearchAirport(_ref) {
         left: '50%'
       },
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_assert_Loading_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {})
-    }) : '', AddFlightOnClick ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_FlightList_AddFlight_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
-      from: fromIATA,
-      desination: toIATA,
-      getData: getData
     }) : '']
   });
 };
