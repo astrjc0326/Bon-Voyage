@@ -19,6 +19,8 @@
 html,
 body {
   height: 100%;
+  /* background-image: url('https://static.vecteezy.com/system/resources/previews/000/532/858/original/world-map-vector.jpg'); */
+  background-size: auto;
 }
 
 body {

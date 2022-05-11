@@ -1,14 +1,15 @@
 const axios = require('axios');
 const sendMail = require('./sendMail.js').sendMail
+const sentRemain = require('./db.js').sentRemain
 
 module.exports = {
-  getFlight: (from, to, price) => {
+  getFlight: (id, from, to, price) => {
     const query = {
       fly_from: from,
       fly_to: to,
       date_from: '28/4/2022',
-      curr: 'USD'
-    }
+      curr: 'USD',
+    };
     const headers = {
       apikey: 'LtW_J16JSqMppDXbbStSCupp_jPfoiY5'
     }
@@ -17,7 +18,7 @@ module.exports = {
       headers: headers
     })
     .then(res => {
-      console.log(res.data.data[0], res.data.data[0].price)
+      // console.log(res.data.data[0], res.data.data[0].price)
       const flightInfo = res.data.data[0]
       if (flightInfo.price <= price) {
         sendMail(flightInfo.cityFrom, flightInfo.flyFrom, flightInfo.cityTo, flightInfo.flyTo, flightInfo.price, flightInfo.deep_link, (err, result)=> {
@@ -25,6 +26,13 @@ module.exports = {
             console.log('can not send email ')
           } else {
             console.log('send email successfully')
+            sentRemain(id, (err, result) => {
+              if (err) {
+                console.log(err)
+              } else {
+                console.log(result)
+              }
+            })
           }
         })
       } else {

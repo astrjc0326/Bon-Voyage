@@ -5,10 +5,14 @@ mongoose.connect(`mongodb://localhost:27017/flightList`);
 // 2. Set up any schema and models needed by the app
 let flightSchema = mongoose.Schema({
   fly_from: String,
+  fly_from_city: String,
   fly_to: String,
+  fly_to_city: String,
   price: Number,
-  url: String
+  url: String,
+  isRemained: {type: Boolean, default: false}
 })
+
 
 let Flight = mongoose.model('Flight', flightSchema);
 // 3. Export the models
@@ -57,20 +61,20 @@ let update = (data, callback) => {
   })
 }
 
-let filter = (word, callback) => {
-  let key ='.*' + word + '.*'
-  console.log('key:', key)
-  Word.find({word: new RegExp(key)}, (err, result) => {
-    if (!err) {
-      console.log(result)
+let sentRemain = (id, callback) => {
+  Flight.findByIdandUpdate(id, {isRemained: true}, (err, result) => {
+    console.log('sentRemain')
+    if (err) {
+      callback(err)
+    } else {
+      console.log(result);
       callback(null, result)
     }
   })
-
 }
 
 module.exports.get = get
 module.exports.save = save
 module.exports.deleteFlight = deleteFlight
 module.exports.update = update
-module.exports.filter = filter
+module.exports.sentRemain = sentRemain

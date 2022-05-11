@@ -13,7 +13,8 @@ module.exports = {
       from: process.env.EMAIL,
       to: process.env.CLIENT_EMAIL,
       subject: 'Low Price Alert!',
-      text: `Only $${price} to fly from ${fromCity}-${from} to ${toCity}-${to}, link:${link}`
+      text: `Only $${price} to fly from ${fromCity}-${from} to ${toCity}-${to},
+      link:${link}`
     };
     transporter.sendMail(mailOptions, (err, info) => {
       if (err) {
