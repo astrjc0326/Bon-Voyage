@@ -11,9 +11,11 @@ BonVoyage is a flight searching webpage.
 ## Components
 
 ### Flight Search Bar
+![alt text](gif/flightSearch.gif)
 ### Flight List
+![alt text](gif/flightlist.gif)
 ### New Journey
-
+![alt text](gif/newJourney.gif)
 ## Installation
 
 install npm package
