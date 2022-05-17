@@ -23,11 +23,12 @@ install npm package
     [Tequila kiwi API](https://tequila-api.kiwi.com)
     [Unsplash](https://api.unsplash.com)
 3. Fill in .env file with tokens
-4. Install npm by running
+4. Fill in the email information in .env file
+5. Install npm by running
 ```bash
 npm install
 ```
-5. Start the server and React development by running
+6. Start the server and React development by running
 ```
 npm start
 ```
