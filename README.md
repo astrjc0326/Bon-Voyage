@@ -16,6 +16,8 @@ BonVoyage is a flight searching webpage.
 ![alt text](gif/flightlist.gif)
 ### New Journey
 ![alt text](gif/newJourney.gif)
+### Auto Remainer
+![alt text](gif/autoRemainer.gif)
 ## Installation
 
 install npm package
