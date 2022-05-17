@@ -1,9 +1,13 @@
 <div align="center">
+
 # BonVoyage
+
 BonVoyage is a flight searching webpage.
 [Components](#getting-started) •
 [Installation](#installation)
+  
 </div>
+
 ## Installation
 
 install npm package
