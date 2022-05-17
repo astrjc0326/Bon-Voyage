@@ -5,7 +5,7 @@
 BonVoyage is a flight searching webpage.
 [Components](#getting-started) •
 [Installation](#installation)
-  
+
 </div>
 
 ## Components
@@ -17,9 +17,22 @@ BonVoyage is a flight searching webpage.
 ## Installation
 
 install npm package
-
+1. Copy example.env file and name it as .env
+2. Apply API token from:
+    [Airport Codes](https://www.air-port-codes.com)
+    [Tequila kiwi API](https://tequila-api.kiwi.com)
+    [Unsplash](https://api.unsplash.com)
+3. Fill in .env file with tokens
+4. Install npm by running
 ```bash
 npm install
+```
+5. Start the server and React development by running
+```
+npm start
+```
+```
+npm run react-dev
 ```
 ## Technologies
 
@@ -30,7 +43,7 @@ npm install
 ![Webpack](https://img.shields.io/badge/webpack-%238DD6F9.svg?style=for-the-badge&logo=webpack&logoColor=black)
 
 
-### Frontend 
+### Frontend
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 ![Styled Components](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
