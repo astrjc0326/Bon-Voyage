@@ -8,6 +8,12 @@ BonVoyage is a flight searching webpage.
   
 </div>
 
+## Components
+
+### Flight Search Bar
+### Flight List
+### New Journey
+
 ## Installation
 
 install npm package
