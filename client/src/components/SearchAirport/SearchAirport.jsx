@@ -30,7 +30,7 @@ const Airport = styled.td`
   }
 `;
 
-const SearchAirport = ({ getData }) => {
+const SearchAirport = ({ getData, isSignIn }) => {
   const [from, setFrom] = useState('');
   const [fromIATA, setFromIATA] = useState('');
   const [fromCity, setFromCity] = useState('');
@@ -38,6 +38,7 @@ const SearchAirport = ({ getData }) => {
   const [to, setTo] = useState('');
   const [toCity, setToCity] = useState('');
   const [fromDropDown, setFromDropDown] = useState([]);
+  const [toCountry, setCountryName] = useState('')
   const [toDropDown, setToDropDown] = useState([]);
   const [departDate, setDepartDate] = useState('');
   const [returnDate, setReturnDate] = useState('');
@@ -86,6 +87,7 @@ const SearchAirport = ({ getData }) => {
       <tr key= { index }>
         <Airport onClick={() => {
           setToCity(country.city);
+          setCountryName(country.country.name);
           setTo(country.name);
           setToIATA(country.iata); setToDropDown([]);
         }}
@@ -137,7 +139,6 @@ const SearchAirport = ({ getData }) => {
               swap_horiz
             </span>
           </label>
-
         </button>
 
         <div>
@@ -173,7 +174,8 @@ const SearchAirport = ({ getData }) => {
         </button>
 
       </Container>
-      <AddButton onClick={() => { setAddFlightOnClick(true); setFlights([])}}>Add to Flight List</AddButton>
+      {isSignIn ? <AddButton onClick={() => { setAddFlightOnClick(true); setFlights([])}}>Add to Flight List</AddButton> : ''}
+
       {AddFlightOnClick ? (
         <AddFlight
           from={fromIATA}
@@ -185,6 +187,7 @@ const SearchAirport = ({ getData }) => {
           setAddFlightOnClick={setAddFlightOnClick}
           setTo={setTo}
           setFrom={setFrom}
+          toCountry={toCountry}
         />
       ) : ''}
       <FlightEntry flights={flights} />

@@ -3,14 +3,16 @@ import ReactDom from 'react-dom';
 import styled from 'styled-components';
 
 const ModalContainer = styled.div`
-background-color: rgba(255,255,255,0.3);
-position: absolute;
-top: 10%;
-left: 30%;
-width: 600px;
-height: 600px;
-border-radius: 20px;
-backdrop-filter: blur(14px);
+  background-color: rgba(255,255,255,0.3);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 600px;
+  height: 600px;
+  border-radius: 20px;
+  backdrop-filter: blur(14px);
+  transform: translate(-50%, -50%)
+
 `
 const ModalHeader = styled.div`
   display:flex ;

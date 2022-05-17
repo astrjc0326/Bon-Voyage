@@ -28,11 +28,11 @@ const Login = ({ onClose, setisSignIn }) => {
   const Login = (
     <SignIn>
       {/* <div style={{}}><h1>Sign In</h1></div> */}
-      <Input placeholder="Enter your Email Address" />
+      <Input placeholder="Username" />
       <br />
-      <Input type="password" placeholder="Password" />
+      <Input type="Password" placeholder="Password" />
 
-      <SigninButton onClick={() => {onClose(false); setisSignIn(true)}}>Sign in</SigninButton>
+      <SigninButton onClick={() => { onClose(false); setisSignIn(true); }}>Sign in</SigninButton>
     </SignIn>
   );
   return (

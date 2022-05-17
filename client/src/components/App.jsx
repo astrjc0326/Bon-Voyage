@@ -74,13 +74,17 @@ const App = () => {
           {/* <h1>BonVoyage</h1> */}
           <Logo />
           {' '}
-          <div>
+          <div style={{paddingLeft: '40px' }}>
             {(isSignIn) ? <Button onClick={() => { setWindow('flightlist'); }}>My Trip</Button> : ''}
-            {(isSignIn) ? <Button onClick={() => { setWindow('journal'); }}>My Journal</Button> : ''}
+            {(isSignIn) ? <Button onClick={() => { setWindow('journal'); }}>New Journey</Button> : ''}
             {(!isSignIn) ? (
               <Greet>
                 <Button onClick={() => { setShowSignin(true); }}>
-                  Sign In
+                  <label>
+                  <span class="material-symbols-outlined">
+                    face
+                 </span>
+                  </label>
                 </Button>
               </Greet>
             ) : <Greet><h2>Hello Anny</h2></Greet>}
@@ -91,7 +95,7 @@ const App = () => {
 
       <Container>
         {/* <Search /> */}
-        <SearchAirport getData={getData} />
+        <SearchAirport getData={getData} isSignIn={isSignIn} />
 
         {(showSignIn) ? <Login onClose={setShowSignin} setisSignIn={setisSignIn} /> : ''}
         {showFlightList}

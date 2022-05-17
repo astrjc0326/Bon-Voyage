@@ -10,11 +10,12 @@ const Container = styled.div`
 `;
 
 function AddFlight({
-  getData, from, desination, setFlights, fromCity, toCity, setAddFlightOnClick, setTo, setFrom
+  getData, from, desination, setFlights, fromCity, toCity, setAddFlightOnClick, setTo, setFrom, toCountry
 }) {
   const handleSubmitOnClick = () => {
     setFlights([]);
     const data = {
+      toCountry,
       fly_from: from,
       fly_from_city: fromCity,
       fly_to: desination,

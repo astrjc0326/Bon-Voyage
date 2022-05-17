@@ -11,7 +11,7 @@ let flightSchema = mongoose.Schema({
   price: Number,
   url: String,
   isRemained: {type: Boolean, default: false}
-})
+});
 
 
 let Flight = mongoose.model('Flight', flightSchema);
@@ -51,6 +51,7 @@ let deleteFlight = (id, callback) => {
 let update = (data, callback) => {
   let id = data._id;
   delete data._id;
+  data.isRemained = false;
   Flight.findByIdAndUpdate(id, data, (err, result) => {
     if (err) {
       callback(err)
@@ -62,7 +63,7 @@ let update = (data, callback) => {
 }
 
 let sentRemain = (id, callback) => {
-  Flight.findByIdandUpdate(id, {isRemained: true}, (err, result) => {
+  Flight.findByIdAndUpdate(id, { isRemained: true }, (err, result) => {
     console.log('sentRemain')
     if (err) {
       callback(err)

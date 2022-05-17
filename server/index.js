@@ -2,10 +2,12 @@ require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const axios = require('axios');
-const { save } = require('./db');
-const { get } = require('./db');
-const { deleteFlight } = require('./db');
-const { update } = require('./db');
+const {
+  save, get, deleteFlight, update, sentRemain,
+} = require('./db');
+// const { get } = require('./db');
+// const { deleteFlight } = require('./db');
+// const { update } = require('./db');
 const { getFlight } = require('./getFlight');
 
 const app = express();
@@ -43,46 +45,52 @@ app.get('/flights', (req, res) => {
     headers,
   })
     .then((response) => { console.log(response.data); res.send(response.data); })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log('can not get flight'));
 });
 
 app.get('/flightlist', (req, res) => {
   console.log('get flightlists');
   get((err, result) => {
     if (err) {
-      console.log(err);
+      console.log('cant not get flight list');
     } else {
       res.send(result);
-      // result.forEach(flight => {
-      //   getFlight(flight._id, flight.fly_from, flight.fly_to, flight.price)
-      // })
+      result.forEach((flight) => {
+        if (flight.isRemained) { return }
+        getFlight(flight._id, flight.fly_from, flight.fly_to, flight.price);
+      });
     }
   });
 });
 
 app.post('/flightlist', (req, res) => {
-  axios.get(`https://api.unsplash.com/search/photos?per_page=1&query=${req.body.fly_to_city}`, {
+  console.log(`getting photo to ${req.body.fly_to_city}`)
+  axios.get(`https://api.unsplash.com/search/photos?per_page=1&query=${req.body.toCountry}`, {
     headers: { Authorization: 'Client-ID DecrbDWxfD4E79MPuxkQ89mUySzFeWnHqM6KG7ykXZk' },
   })
     .then((response) => {
       req.body.url = response.data.results[0].urls.thumb;
+      delete req.body.toCountry;
       console.log(req.body);
       save(req.body, (err) => {
         if (!err) {
           res.sendStatus(201);
+        } else {
+          console.log('can not add flight into db');
         }
       });
     })
-    .catch((err) => console.log(err, 'err'));
+    .catch(() => console.log('cant get the photo from api'));
 });
 
 app.put('/flightlist', (req, res) => {
   console.log(req.body);
   update(req.body, (err, result) => {
     if (err) {
-      console.log(err);
+      console.log('can not update the price of the flight');
       res.sendStatus(501);
     } else {
+      console.log('update price successfully');
       res.sendStatus(204);
     }
   });
@@ -91,8 +99,10 @@ app.put('/flightlist', (req, res) => {
 app.delete('/flightlist/:id', (req, res) => {
   deleteFlight(req.params.id, (err, result) => {
     if (err) {
+      console.log('can not delete the flight');
       res.sendStatus(501);
     } else {
+      console.log('delete the flight successfully');
       res.sendStatus(200);
     }
   });
@@ -104,18 +114,31 @@ app.get('/photos/:country', (req, res) => {
   })
     .then((response) => {
       const result = response.data.results.map((photo) => photo.urls.small);
+      console.log('get the photo successfully');
       res.send(result);
     })
-    .catch((err) => console.log('can not get photos'));
+    .catch(() => console.log('can not get photos'));
 });
 
-// setInterval(function() {
+// setInterval(() => {
 //   if (flights) {
-//     console.log('search ticket')
-//     flights.forEach(flight => {
-//   getFlight(flight._id, flight.fly_from, flight.fly_to, flight.price)
-//   })}
-// }, 1000)
+//     console.log('search ticket');
+//     flights.forEach((flight) => {
+//       if (flight.isRemained) { return; }
+//         getFlight(flight._id, flight.fly_from, flight.fly_to, flight.price);
+//     });
+//   }
+// }, 10000);
+
+// app.put('/remain/:id', (req, res) => {
+//   sentRemain(req.params.id, (err, result) => {
+//     if (!err) {
+//       res.send(201);
+//     } else {
+//       console.log(err);
+//     }
+//   })
+// })
 
 app.listen(process.env.PORT, () => {
   console.log(`Listening at http://localhost:${process.env.PORT}`);

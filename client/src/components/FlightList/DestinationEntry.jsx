@@ -24,6 +24,7 @@ const Input = styled.input`
 
 const Td = styled.td`
   padding: 10px
+  width: auto
 `;
 
 const DestinationEntry = ({ country, getData }) => {
@@ -35,7 +36,7 @@ const DestinationEntry = ({ country, getData }) => {
   const [editOnClick, seteditOnClick] = useState(false);
   const [price, setPrice] = useState();
 
-  const handleSubmitOnClick = ( country ) => {
+  const handleSubmitOnClick = (country) => {
     const data = {
       _id: country._id,
       price,
@@ -58,6 +59,15 @@ const DestinationEntry = ({ country, getData }) => {
         -
         {' '}
         {country.fly_to}
+        <br />
+        <p style={{ fontSize: '15px' }}>
+          {country.fly_from_city}
+          {' '}
+          -
+          {' '}
+          {country.fly_to_city}
+
+        </p>
       </Td>
       <Td>
         $
